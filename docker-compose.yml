@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  mailhog:
+    user: root
+    image: mailhog/mailhog:latest
+    restart: always
+    volumes:
+      - maildir:/data/mailhog/maildir
+      - ./auth:/data/mailhog/auth
+    ports:
+      - 1025:1025
+      - 8025:8025
+    environment:
+      MH_AUTH_FILE: /data/mailhog/auth
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /data/mailhog/maildir
+
+volumes:
+  maildir:
